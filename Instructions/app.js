@@ -1,20 +1,14 @@
 // Setup the chart Area
 
 var svgWidth = parseInt(d3.select("#scatter").style("width"));
-
 var svgHeight = svgWidth - svgWidth / 3.9;
-
 var margin = 20;
-
 var label = 110;
-
 var padBottom = 40;
-
 var padLeft = 40;
 
 // Create the SVG Wrapper
-var svg = d3
-  .select("#scatter")
+var svg = d3.select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight)
@@ -75,8 +69,7 @@ function yAxesText() {
 yAxesText();
 
 // Appending the text to Y-Axis of the SVG
-yText
-  .append("text")
+yText.append("text")
   .attr("y", 26)
   .attr("data-name", "healthcare")
   .attr("data-axis", "y")
@@ -134,20 +127,16 @@ function figure(importData) {
       return parseFloat(data[dataX]) * 0.90;
     });
 
-    // .max will grab the largest datum from the selected column.
     xMax = d3.max(importData, function(data) {
       return parseFloat(data[dataX]) * 1.10;
     });
   }
 
-  // b. change the min and max for y
   function yChange() {
-    // min will grab the smallest datum from the selected column.
     yMin = d3.min(importData, function(data) {
       return parseFloat(data[dataY]) * 0.90;
     });
 
-    // .max will grab the largest datum from the selected column.
     yMax = d3.max(importData, function(data) {
       return parseFloat(data[dataY]) * 1.10;
     });
@@ -158,12 +147,10 @@ function figure(importData) {
 
   // Create Scales
 
-  var xLinearScale = d3
-    .scaleLinear()
+  var xLinearScale = d3.scaleLinear()
     .domain([xMin, xMax])
     .range([margin + label, svgWidth - margin]);
-  var yLinearScale = d3
-    .scaleLinear()
+  var yLinearScale = d3.scaleLinear()
     .domain([yMin, yMax])
     .range([svgHeight - margin - label, margin]);
 
@@ -199,7 +186,6 @@ function figure(importData) {
 // combining all of the data points
   var circleMain = svg.selectAll("g circleMain").data(importData).enter();
 
-  // We append the circles for each row of data (or each state, in this case).
   circleMain
     .append("circle")
 
